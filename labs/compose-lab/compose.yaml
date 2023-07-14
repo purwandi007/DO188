@@ -1,0 +1,20 @@
+services:
+  wiremock:
+    container_name : "quotes-provider"
+    image: "registry.ocp4.example.com:8443/redhattraining/wiremock"
+    volumes:
+      - ~/DO188/labs/compose-lab/wiremock/stubs:/home/wiremock:Z
+     networks:
+      - lab-net
+  quotes-api: 
+    container_name: "quotes-api"
+    image: "registry.ocp4.example.com:8443/redhattraining/podman-quotesapi-compose"
+    ports:
+      - "8080:8080"
+    networks:
+      - lab-net
+  quotes-ui: 
+    container_name: "quotes-ui"
+    image: "registry.ocp4.example.com:8443/redhattraining/podman-quotes-ui"
+    networks:
+      - lab-net: {}

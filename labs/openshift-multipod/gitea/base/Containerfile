@@ -1,0 +1,8 @@
+FROM registry.ocp4.example.com:8443/ubi9/ubi:9.0.0-1468
+
+ENV VERSION="1.16.8" \
+    GITEA_BIN_DIR=/usr/local/bin/
+
+RUN dnf install -y git wget && \
+    wget "https://dl.gitea.io/gitea/${VERSION}/gitea-${VERSION}-linux-amd64" -O ${GITEA_BIN_DIR}/gitea && \
+    chmod +x ${GITEA_BIN_DIR}/gitea
